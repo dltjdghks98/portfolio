@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PERSONAL FILE — 나를 소개하는 한 페이지 (템플릿)</title>
+<meta name="description" content="빈 틀 템플릿 — OOO, □□□ 표시된 자리를 본인 내용으로 채워서 사용하세요.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void:#0A0A0A;
+    --void-soft:#171717;
+    --paper:#D9D6CC;
+    --paper-soft:#CFCBBD;
+    --ink:#111111;
+    --paper-text:#EDEBE3;
+    --orange:#E8531A;
+    --neon:#C6FF3D;
+    --rust-deep:#8A3210;
+    --line-on-void:rgba(237,235,227,0.22);
+    --line-on-paper:rgba(17,17,17,0.16);
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans KR', system-ui, sans-serif;
+    font-size:17px;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3{ margin:0 0 0.6em; line-height:1.3; }
+  .mono{ font-family:'Space Mono', monospace; }
+
+  h1{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    text-transform:uppercase;
+  }
+  h2{ font-family:'Space Mono', monospace; font-weight:700; }
+  h3{ font-family:'IBM Plex Sans KR', sans-serif; font-weight:600; }
+
+  a{ color:inherit; }
+
+  /* ---------- focus ---------- */
+  a:focus-visible, summary:focus-visible, input:focus-visible,
+  .portrait:focus-visible{
+    outline:3px solid var(--orange);
+    outline-offset:3px;
+    border-radius:2px;
+  }
+  .void-zone :focus-visible{ outline-color:var(--neon); }
+
+  .skip-link{
+    position:absolute;
+    left:1rem; top:-3.5rem;
+    background:var(--void);
+    color:var(--paper-text);
+    padding:0.7em 1.1em;
+    z-index:100;
+    text-decoration:none;
+    font-family:'Space Mono', monospace;
+    font-size:0.85rem;
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .skip-link{ transition:top .15s ease; }
+  }
+  .skip-link:focus{ top:1rem; }
+
+  .wrap{
+    max-width:60rem;
+    margin:0 auto;
+    padding:0 1.5rem;
+  }
+
+  /* ---------- topbar ---------- */
+  .topbar{
+    background:var(--void);
+    color:var(--paper-text);
+    border-bottom:1px solid var(--line-on-void);
+    padding:0.85rem 0;
+  }
+  .topbar .wrap{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:0.7rem;
+  }
+  .topbar .brand{
+    font-family:'Space Mono', monospace;
+    font-size:0.85rem;
+    letter-spacing:0.02em;
+  }
+  .topbar .brand b{ color:var(--orange); }
+  .motion-toggle{
+    display:flex;
+    align-items:center;
+    gap:0.5em;
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    color:var(--paper-text);
+  }
+  .motion-toggle input{ width:1rem; height:1rem; accent-color:var(--orange); }
+  .case-tag{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    color:var(--paper-text);
+    opacity:0.8;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:radial-gradient(120% 100% at 15% 0%, var(--void-soft) 0%, var(--void) 60%);
+    color:var(--paper-text);
+    padding:2.6rem 0 3rem;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:2rem;
+    align-items:start;
+  }
+  .hero h1{
+    font-size:clamp(1.7rem, 4.4vw, 2.5rem);
+    margin-bottom:0.5rem;
+  }
+  .hero .tagline{
+    max-width:34rem;
+    font-size:1rem;
+    opacity:0.9;
+    margin:0 0 1.2rem;
+  }
+  .chip-row{ display:flex; gap:0.6rem; flex-wrap:wrap; margin-bottom:1.1rem; }
+  .chip{
+    display:inline-block;
+    padding:0.4em 0.9em;
+    font-family:'Space Mono', monospace;
+    font-size:0.82rem;
+    border:1px solid var(--line-on-void);
+  }
+  .evidence-teaser{ font-family:'Space Mono', monospace; font-size:0.85rem; }
+  .evidence-teaser a{ color:var(--orange); text-decoration:underline; }
+
+  .portrait{
+    width:150px;
+    aspect-ratio:3/4;
+    border:1px dashed var(--line-on-void);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:0.8rem;
+    position:relative;
+    font-family:'Space Mono', monospace;
+    font-size:0.75rem;
+    color:var(--paper-text);
+    opacity:0.75;
+  }
+  .crosshair{
+    position:absolute;
+    inset:0;
+    margin:auto;
+    width:70%;
+    height:70%;
+    border:1px solid var(--orange);
+    border-radius:50%;
+    opacity:0;
+  }
+  .crosshair::before,.crosshair::after{
+    content:'';
+    position:absolute;
+    background:var(--orange);
+  }
+  .crosshair::before{ left:50%; top:-14px; bottom:-14px; width:1px; transform:translateX(-50%); }
+  .crosshair::after{ top:50%; left:-14px; right:-14px; height:1px; transform:translateY(-50%); }
+  @media (prefers-reduced-motion:no-preference){
+    .crosshair{ transition:opacity .2s ease; }
+  }
+  .portrait:hover .crosshair,
+  .portrait:focus-visible .crosshair{ opacity:1; }
+  .portrait-hint{ position:relative; z-index:1; }
+
+  @media (max-width:640px){
+    .hero .wrap{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- sections ---------- */
+  main section{
+    padding:3rem 0;
+    border-bottom:1px solid var(--line-on-paper);
+  }
+  main section:last-of-type{ border-bottom:none; }
+
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.04em;
+    color:var(--rust-deep);
+    margin-bottom:0.5rem;
+  }
+  .void-zone .eyebrow{ color:var(--neon); }
+
+  section h2{ font-size:clamp(1.3rem, 3vw, 1.7rem); }
+  .section-note{ max-width:34rem; opacity:0.75; margin-bottom:1.6rem; font-size:0.95rem; }
+
+  /* scope intake — grid bg */
+  .scope-section{
+    background-image:
+      linear-gradient(var(--line-on-paper) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-on-paper) 1px, transparent 1px);
+    background-size:32px 32px;
+  }
+  .scope-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1.5rem;
+  }
+  .scope-box{
+    background:var(--paper);
+    border:1px dashed var(--ink);
+    padding:1.3rem 1.4rem;
+  }
+  .scope-box h3{ font-size:1rem; margin-bottom:0.8rem; }
+  .scope-box ul{ margin:0; padding-left:1.2rem; }
+  .scope-box li{ margin-bottom:0.5rem; }
+
+  /* dossier status panel */
+  .dossier{
+    background:var(--void);
+    color:var(--paper-text);
+  }
+  .dossier .wrap{
+    display:grid;
+    grid-template-columns:1fr 1.2fr;
+    gap:2.2rem;
+    align-items:start;
+  }
+  .dossier .status-label{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    opacity:0.7;
+    margin-bottom:0.3rem;
+  }
+  .dossier .status-value{
+    font-family:'Space Mono', monospace;
+    font-size:1.4rem;
+    color:var(--orange);
+    margin-bottom:1.4rem;
+  }
+  .progress-track{
+    height:6px;
+    background:var(--line-on-void);
+    margin-bottom:1.6rem;
+  }
+  .progress-fill{ height:100%; width:0%; background:var(--neon); }
+  .progress-caption{ font-family:'Space Mono', monospace; font-size:0.72rem; opacity:0.6; margin-top:0.4rem; }
+
+  fieldset{ border:none; margin:0; padding:0; }
+  legend{
+    font-family:'Space Mono', monospace;
+    font-size:0.82rem;
+    opacity:0.75;
+    margin-bottom:0.8rem;
+    padding:0;
+  }
+  .checklist{ display:flex; flex-direction:column; gap:0.7rem; }
+  .checklist label{
+    display:flex;
+    align-items:flex-start;
+    gap:0.6em;
+    font-size:0.93rem;
+  }
+  .checklist input{
+    margin-top:0.3em;
+    width:1.05rem; height:1.05rem;
+    accent-color:var(--neon);
+    flex-shrink:0;
+  }
+
+  @media (max-width:700px){
+    .dossier .wrap, .scope-grid{ grid-template-columns:1fr; }
+  }
+
+  /* strengths — hover/focus color invert */
+  .principle{
+    background:var(--paper);
+    color:var(--ink);
+    border:1px solid var(--line-on-paper);
+    padding:1.5rem 1.6rem;
+    margin-bottom:1rem;
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .principle{ transition:background .25s ease, color .25s ease; }
+    .principle h3, .principle summary{ transition:color .25s ease; }
+  }
+  .principle:hover, .principle:focus-within{
+    background:var(--void);
+    color:var(--paper-text);
+  }
+  .principle:hover h3, .principle:focus-within h3{ color:var(--neon); }
+  .principle h3{ font-size:1.08rem; margin-bottom:0.6rem; }
+
+  summary{
+    cursor:pointer;
+    font-family:'Space Mono', monospace;
+    font-size:0.85rem;
+    color:var(--rust-deep);
+    list-style:none;
+  }
+  .principle:hover summary, .principle:focus-within summary{ color:var(--orange); }
+  summary::-webkit-details-marker{ display:none; }
+  summary::before{ content:"[ + ] "; }
+  details[open] summary::before{ content:"[ − ] "; }
+
+  .story{ margin-top:0.9rem; padding-left:1.2rem; border-left:2px solid currentColor; max-width:34rem; }
+  .story dt{ font-family:'Space Mono', monospace; font-size:0.78rem; opacity:0.65; margin-top:0.7rem; }
+  .story dt:first-child{ margin-top:0; }
+  .story dd{ margin:0.15rem 0 0; }
+  .evidence-link{ display:inline-block; margin-top:0.9rem; font-family:'Space Mono', monospace; font-size:0.85rem; }
+
+  /* evidence */
+  .evidence-frame{
+    border:1px dashed var(--ink);
+    padding:2.2rem 1.5rem;
+    text-align:center;
+    font-family:'Space Mono', monospace;
+    font-size:0.9rem;
+    opacity:0.7;
+    max-width:34rem;
+  }
+
+  /* closing */
+  .closing{
+    background:var(--void);
+    color:var(--paper-text);
+    padding:3.4rem 0 0;
+    overflow:hidden;
+  }
+  .closing h2{ font-size:clamp(1.4rem, 3.4vw, 2rem); }
+  .closing .box{
+    border:1px dashed var(--line-on-void);
+    padding:1.2rem 1.4rem;
+    font-family:'Space Mono', monospace;
+    font-size:0.85rem;
+    color:var(--orange);
+    max-width:30rem;
+    margin-top:1.2rem;
+  }
+
+  .marquee{
+    margin-top:2.6rem;
+    border-top:1px solid var(--line-on-void);
+    overflow:hidden;
+    white-space:nowrap;
+    padding:0.9rem 0;
+  }
+  .marquee-track{
+    display:inline-block;
+    font-family:'Space Mono', monospace;
+    font-size:0.85rem;
+    opacity:0.7;
+  }
+  @media (prefers-reduced-motion:no-preference){
+    .marquee-track{
+      animation:scroll-left 16s linear infinite;
+    }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .marquee-track{ animation:none; }
+  }
+  /* manual on-page toggle overrides everything */
+  body:has(#reduce-motion:checked) .marquee-track{
+    animation:none !important;
+  }
+  @keyframes scroll-left{
+    from{ transform:translateX(0); }
+    to{ transform:translateX(-50%); }
+  }
+  .sr-only{
+    position:absolute; width:1px; height:1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap;
+  }
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">본문으로 바로가기</a>
+
+<header class="topbar">
+  <div class="wrap">
+    <span class="brand mono">[<b>이니셜</b>] / PERSONAL FILE — □□□ (부제 자리)</span>
+    <div class="motion-toggle">
+      <input type="checkbox" id="reduce-motion">
+      <label for="reduce-motion">움직임 줄이기</label>
+    </div>
+    <span class="case-tag">CASE: OOO</span>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ 히어로 : 소개 + 목적 문장 + 활동 + 근거 링크 (첫 화면에 전부 보이게 유지할 것) ============ -->
+  <section class="hero void-zone">
+    <div class="wrap">
+      <div>
+        <h1>OOO는<br>□□□ 인가?</h1>
+        <!-- ✏️ 여기 수정: 본인을 대표하는 한 문장 헤드라인. 질문형이 아니어도 됨 -->
+        <p class="tagline">
+          [이 페이지의 대상과 목적을 한 문장으로 — 예: 이 페이지는 누구에게,
+          무엇을 보여주기 위해 만든 건가요?]
+        </p>
+        <div class="chip-row">
+          <span class="chip">[활동/키워드 1]</span>
+          <span class="chip">[활동/키워드 2]</span>
+        </div>
+        <p class="evidence-teaser">
+          근거 → <a href="#evidence">[근거 자료 미리보기 링크 문구]</a>
+        </p>
+      </div>
+      <div class="portrait" tabindex="0">
+        <span class="crosshair" aria-hidden="true"></span>
+        <span class="portrait-hint">[본인 사진 또는<br>상징 이미지 자리]<br><br>마우스를 올리거나<br>Tab으로 이동</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 공개 범위 : 공개 3개 / 비공개 3개 ============ -->
+  <section id="scope" class="scope-section" aria-labelledby="scope-h">
+    <div class="wrap">
+      <p class="eyebrow">SCOPE INTAKE</p>
+      <h2 id="scope-h">공개 범위</h2>
+      <p class="section-note">이 페이지에 무엇을 담고, 무엇을 담지 않을지 먼저 정합니다.</p>
+      <div class="scope-grid">
+        <div class="scope-box">
+          <h3>공개할 정보</h3>
+          <ul>
+            <li>□□□</li>
+            <li>□□□</li>
+            <li>□□□</li>
+          </ul>
+        </div>
+        <div class="scope-box">
+          <h3>공개하지 않을 정보</h3>
+          <ul>
+            <li>□□□</li>
+            <li>□□□</li>
+            <li>□□□</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 완주 체크리스트 (실제 제출 전 체크용 — 그대로 써도 됨) ============ -->
+  <section class="dossier void-zone" aria-labelledby="dossier-h">
+    <div class="wrap">
+      <div>
+        <p class="status-label mono">PAGE STATUS</p>
+        <p class="status-value">DRAFT — OOO</p>
+        <div class="progress-track"><div class="progress-fill" style="width:0%;"></div></div>
+        <p class="progress-caption">완료 항목 수에 맞춰 위 막대 width 값을 직접 수정하세요.</p>
+      </div>
+      <fieldset>
+        <legend id="dossier-h">완주 체크리스트</legend>
+        <div class="checklist">
+          <label><input type="checkbox"> 대상·공개 범위와 근거를 정했습니다.</label>
+          <label><input type="checkbox"> 두 기준 화면(1366×768 / 1920×1080)에서 실제로 검사했습니다.</label>
+          <label><input type="checkbox"> 상호작용을 마우스와 키보드로 각각 확인했습니다.</label>
+          <label><input type="checkbox"> 공개 금지 정보와 비밀값이 없는지 확인했습니다.</label>
+          <label><input type="checkbox"> 짧은 확인법과 AI/본인 판단을 제출문에 정리했습니다.</label>
+        </div>
+      </fieldset>
+    </div>
+  </section>
+
+  <!-- ============ 강점 또는 취향 3가지 : 상황·행동·결과 ============ -->
+  <section id="principles" aria-labelledby="principles-h">
+    <div class="wrap">
+      <p class="eyebrow">CASE NOTES</p>
+      <h2 id="principles-h">강점 또는 취향 세 가지</h2>
+      <p class="section-note">말로 설명하기보다, 실제로 있었던 상황과 결과로 보여주세요.</p>
+
+      <div class="principle">
+        <h3>[강점 또는 취향 1]</h3>
+        <details>
+          <summary>상황 · 행동 · 결과 보기</summary>
+          <dl class="story">
+            <dt>상황</dt><dd>[어떤 상황이었나요?]</dd>
+            <dt>행동</dt><dd>[무엇을 했나요?]</dd>
+            <dt>결과</dt><dd>[눈에 보이는 결과는 무엇이었나요?]</dd>
+          </dl>
+        </details>
+      </div>
+
+      <div class="principle">
+        <h3>[강점 또는 취향 2]</h3>
+        <details>
+          <summary>상황 · 행동 · 결과 보기</summary>
+          <dl class="story">
+            <dt>상황</dt><dd>[어떤 상황이었나요?]</dd>
+            <dt>행동</dt><dd>[무엇을 했나요?]</dd>
+            <dt>결과</dt><dd>[눈에 보이는 결과는 무엇이었나요?]</dd>
+          </dl>
+        </details>
+      </div>
+
+      <div class="principle">
+        <h3>[강점 또는 취향 3]</h3>
+        <details>
+          <summary>상황 · 행동 · 결과 보기</summary>
+          <dl class="story">
+            <dt>상황</dt><dd>[어떤 상황이었나요?]</dd>
+            <dt>행동</dt><dd>[무엇을 했나요?]</dd>
+            <dt>결과</dt><dd>[눈에 보이는 결과는 무엇이었나요?]</dd>
+          </dl>
+          <a class="evidence-link" href="#evidence">근거 — 아래에서 확인할 수 있습니다 →</a>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 근거 : 최소 1개는 위 강점 항목과 연결되어야 함 ============ -->
+  <section id="evidence" aria-labelledby="evidence-h">
+    <div class="wrap">
+      <p class="eyebrow">EVIDENCE</p>
+      <h2 id="evidence-h">근거 자료</h2>
+      <p class="section-note">개인정보를 제거한 산출물, 캡처, 또는 결과를 확인할 수 있는 링크를 하나 이상 연결하세요.</p>
+      <div class="evidence-frame">
+        [근거 자료 — 이미지, 표, 또는 링크 자리]
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ 마무리 ============ -->
+<footer class="closing void-zone">
+  <div class="wrap">
+    <p class="eyebrow">STATUS</p>
+    <h2>OOO<br>□□□</h2>
+    <!-- ✏️ 여기 수정: 마무리 한 줄 + 짧은 확인 방법 요약 -->
+    <div class="box">
+      확인법 요약 — ① OOO ② OOO ③ OOO ④ OOO
+    </div>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <span class="marquee-track">DESIGNED&nbsp;BY&nbsp;OOO&nbsp;&nbsp;&nbsp;&nbsp;DESIGNED&nbsp;BY&nbsp;OOO&nbsp;&nbsp;&nbsp;&nbsp;DESIGNED&nbsp;BY&nbsp;OOO&nbsp;&nbsp;&nbsp;&nbsp;DESIGNED&nbsp;BY&nbsp;OOO&nbsp;&nbsp;&nbsp;&nbsp;</span>
+  </div>
+  <p class="sr-only">제작: OOO</p>
+</footer>
+
+</body>
+</html>
