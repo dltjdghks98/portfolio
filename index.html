@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PERSONAL FILE — 나를 소개하는 한 페이지 (템플릿)</title>
-<meta name="description" content="빈 틀 템플릿 — OOO, □□□ 표시된 자리를 본인 내용으로 채워서 사용하세요.">
+<title>PERSONAL FILE — 나를 소개하는 한 페이지</title>
+<meta name="description" content="이성환 - 나를 소개하는 한 페이지">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -152,7 +152,7 @@
   .portrait{
     width:150px;
     aspect-ratio:3/4;
-    border:1px dashed var(--line-on-void);
+    border:none;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -225,7 +225,7 @@
   }
   .scope-box{
     background:var(--paper);
-    border:1px dashed var(--ink);
+    border:1px solid var(--ink);
     padding:1.3rem 1.4rem;
   }
   .scope-box h3{ font-size:1rem; margin-bottom:0.8rem; }
@@ -260,7 +260,7 @@
     background:var(--line-on-void);
     margin-bottom:1.6rem;
   }
-  .progress-fill{ height:100%; width:0%; background:var(--neon); }
+  .progress-fill{ height:100%; width:100%; background:var(--neon); }
   .progress-caption{ font-family:'Space Mono', monospace; font-size:0.72rem; opacity:0.6; margin-top:0.4rem; }
 
   fieldset{ border:none; margin:0; padding:0; }
@@ -326,15 +326,18 @@
   .story dd{ margin:0.15rem 0 0; }
   .evidence-link{ display:inline-block; margin-top:0.9rem; font-family:'Space Mono', monospace; font-size:0.85rem; }
 
-  /* evidence */
+  /* evidence - 점선 테두리 제거 및 이미지 스타일 지정 */
   .evidence-frame{
-    border:1px dashed var(--ink);
-    padding:2.2rem 1.5rem;
-    text-align:center;
-    font-family:'Space Mono', monospace;
-    font-size:0.9rem;
-    opacity:0.7;
-    max-width:34rem;
+    border:none;
+    padding:0;
+    max-width:100%;
+  }
+  .evidence-img{
+    width:100%;
+    max-width:800px;
+    height:auto;
+    display:block;
+    border-radius:4px;
   }
 
   /* closing */
@@ -346,7 +349,7 @@
   }
   .closing h2{ font-size:clamp(1.4rem, 3.4vw, 2rem); }
   .closing .box{
-    border:1px dashed var(--line-on-void);
+    border:none;
     padding:1.2rem 1.4rem;
     font-family:'Space Mono', monospace;
     font-size:0.85rem;
@@ -376,7 +379,6 @@
   @media (prefers-reduced-motion:reduce){
     .marquee-track{ animation:none; }
   }
-  /* manual on-page toggle overrides everything */
   body:has(#reduce-motion:checked) .marquee-track{
     animation:none !important;
   }
@@ -396,43 +398,40 @@
 
 <header class="topbar">
   <div class="wrap">
-    <span class="brand mono">[<b>이니셜</b>] </span>
+    <span class="brand mono">[<b>LSH</b>]</span>
     <div class="motion-toggle">
       <input type="checkbox" id="reduce-motion">
       <label for="reduce-motion">움직임 줄이기</label>
     </div>
-    <span class="case-tag">CASE: OOO</span>
+    <span class="case-tag">CASE: 이성환</span>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- ============ 히어로 : 소개 + 목적 문장 + 활동 + 근거 링크 (첫 화면에 전부 보이게 유지할 것) ============ -->
+  <!-- 히어로 -->
   <section class="hero void-zone">
     <div class="wrap">
       <div>
-        <h1>이성환은<br>노력형 인가?</h1>
-        <!-- ✏️ 여기 수정: 본인을 대표하는 한 문장 헤드라인. 질문형이 아니어도 됨 -->
+        <h1>이성환은<br>노력형인가?</h1>
         <p class="tagline">
-          [책임감 있게 맡은 업무를 수행, 원만한 대인관계 , 배려와 공감 능력 , 유연한 문제 해결
-          꼼꼼함, 배움의 자세 ]
+          책임감 있게 맡은 업무를 수행하고, 배려와 공감을 바탕으로 문제 해결을 이끌어냅니다.
         </p>
         <div class="chip-row">
-          <span class="chip">[활동/키워드 1]</span>
-          <span class="chip">[활동/키워드 2]</span>
+          <span class="chip">[인프라 구축]</span>
+          <span class="chip">[네트워크 운영]</span>
         </div>
         <p class="evidence-teaser">
-          근거 → <a href="#evidence">[근거 자료 미리보기 링크 문구]</a>
+          근거 → <a href="#evidence">수행 내역 확인하기</a>
         </p>
       </div>
       <div class="portrait" tabindex="0">
         <span class="crosshair" aria-hidden="true"></span>
-        
       </div>
     </div>
   </section>
 
-  <!-- ============ 공개 범위 : 공개 3개 / 비공개 3개 ============ -->
+  <!-- 공개 범위 -->
   <section id="scope" class="scope-section" aria-labelledby="scope-h">
     <div class="wrap">
       <p class="eyebrow">SCOPE INTAKE</p>
@@ -452,36 +451,36 @@
           <ul>
             <li>얼굴</li>
             <li>경력사항</li>
-            <li>자격사</li>
+            <li>자격증</li>
           </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ 완주 체크리스트 (실제 제출 전 체크용 — 그대로 써도 됨) ============ -->
+  <!-- 완주 체크리스트 -->
   <section class="dossier void-zone" aria-labelledby="dossier-h">
     <div class="wrap">
       <div>
         <p class="status-label mono">PAGE STATUS</p>
-        <p class="status-value">DRAFT — OOO</p>
-        <div class="progress-track"><div class="progress-fill" style="width:0%;"></div></div>
-        <p class="progress-caption">완료 항목 수에 맞춰 위 막대 width 값을 직접 수정하세요.</p>
+        <p class="status-value">COMPLETE — 이성환</p>
+        <div class="progress-track"><div class="progress-fill" style="width:100%;"></div></div>
+        <p class="progress-caption">검토 완료됨</p>
       </div>
       <fieldset>
         <legend id="dossier-h">완주 체크리스트</legend>
         <div class="checklist">
-          <label><input type="checkbox"> 대상·공개 범위와 근거를 정했습니다.</label>
-          <label><input type="checkbox"> 두 기준 화면(1366×768 / 1920×1080)에서 실제로 검사했습니다.</label>
-          <label><input type="checkbox"> 상호작용을 마우스와 키보드로 각각 확인했습니다.</label>
-          <label><input type="checkbox"> 공개 금지 정보와 비밀값이 없는지 확인했습니다.</label>
-          <label><input type="checkbox"> 짧은 확인법과 AI/본인 판단을 제출문에 정리했습니다.</label>
+          <label><input type="checkbox" checked> 대상·공개 범위와 근거를 정했습니다.</label>
+          <label><input type="checkbox" checked> 두 기준 화면(1366×768 / 1920×1080)에서 실제로 검사했습니다.</label>
+          <label><input type="checkbox" checked> 상호작용을 마우스와 키보드로 각각 확인했습니다.</label>
+          <label><input type="checkbox" checked> 공개 금지 정보와 비밀값이 없는지 확인했습니다.</label>
+          <label><input type="checkbox" checked> 짧은 확인법과 AI/본인 판단을 제출문에 정리했습니다.</label>
         </div>
       </fieldset>
     </div>
   </section>
 
-  <!-- ============ 강점 또는 취향 3가지 : 상황·행동·결과 ============ -->
+  <!-- 강점 세 가지 -->
   <section id="principles" aria-labelledby="principles-h">
     <div class="wrap">
       <p class="eyebrow">CASE NOTES</p>
@@ -489,37 +488,37 @@
       <p class="section-note">말로 설명하기보다, 실제로 있었던 상황과 결과로 보여주세요.</p>
 
       <div class="principle">
-        <h3>[강점 또는 취향 1]</h3>
-        <details>
+        <h3>1. AI Agent 활용 및 기업 인프라 구축</h3>
+        <details open>
           <summary>상황 · 행동 · 결과 보기</summary>
           <dl class="story">
-            <dt>상황</dt><dd>[AI Agent 활용 및 기업 인프라 구축 실습]</dd>
-            <dt>행동</dt><dd>[AI Agent를 활용하여 요구사항을 분석하고 Linux 서버, 네트워크, 웹 서비스를 구축하며 발생한 오류를 직접 분석·수정하였다.]</dd>
-            <dt>결과</dt><dd>[기업 인프라 구축 과정을 이해하고 문제 해결 능력을 향상시켰으며, 안정적으로 서비스를 운영할 수 있는 환경을 구축하였다.]</dd>
+            <dt>상황</dt><dd>AI Agent 활용 및 기업 인프라 구축 실습</dd>
+            <dt>행동</dt><dd>AI Agent를 활용하여 요구사항을 분석하고 Linux 서버, 네트워크, 웹 서비스를 구축하며 발생한 오류를 직접 분석·수정하였다.</dd>
+            <dt>결과</dt><dd>기업 인프라 구축 과정을 이해하고 문제 해결 능력을 향상시켰으며, 안정적으로 서비스를 운영할 수 있는 환경을 구축하였다.</dd>
           </dl>
         </details>
       </div>
 
       <div class="principle">
-        <h3>[강점 또는 취향 2]</h3>
-        <details>
+        <h3>2. AI 기반 네트워크 운영</h3>
+        <details open>
           <summary>상황 · 행동 · 결과 보기</summary>
           <dl class="story">
-            <dt>상황</dt><dd>[AI 기반 네트워크 운영]</dd>
-            <dt>행동</dt><dd>[AI를 활용해 네트워크 구성과 설정을 검토하고 라우팅, VLAN, DHCP, DNS 등을 구성하며 장애 발생 시 원인을 분석하고 복구하였다.]</dd>
-            <dt>결과</dt><dd>[네트워크 운영 절차를 이해하고 장애 대응 능력을 향상시켰으며, 안정적인 네트워크 환경을 구현하였다.]</dd>
+            <dt>상황</dt><dd>AI 기반 네트워크 운영</dd>
+            <dt>행동</dt><dd>AI를 활용해 네트워크 구성과 설정을 검토하고 라우팅, VLAN, DHCP, DNS 등을 구성하며 장애 발생 시 원인을 분석하고 복구하였다.</dd>
+            <dt>결과</dt><dd>네트워크 운영 절차를 이해하고 장애 대응 능력을 향상시켰으며, 안정적인 네트워크 환경을 구현하였다.</dd>
           </dl>
         </details>
       </div>
 
       <div class="principle">
-        <h3>[강점 또는 취향 3]</h3>
-        <details>
+        <h3>3. 보안 정책 설계</h3>
+        <details open>
           <summary>상황 · 행동 · 결과 보기</summary>
           <dl class="story">
-            <dt>상황</dt><dd>[보안 정책 설계]</dd>
-            <dt>행동</dt><dd>[방화벽, 접근 제어, 계정 권한 관리 등 보안 정책을 설계하고 시스템에 적용하여 보안 취약점을 점검하였다.]</dd>
-            <dt>결과</dt><dd>[보안 정책의 중요성을 이해하고 시스템의 보안성을 강화하는 경험을 쌓았으며, 보안 사고 예방을 위한 기본 역량을 갖추었다.]</dd>
+            <dt>상황</dt><dd>보안 정책 설계</dd>
+            <dt>행동</dt><dd>방화벽, 접근 제어, 계정 권한 관리 등 보안 정책을 설계하고 시스템에 적용하여 보안 취약점을 점검하였다.</dd>
+            <dt>결과</dt><dd>보안 정책의 중요성을 이해하고 시스템의 보안성을 강화하는 경험을 쌓았으며, 보안 사고 예방을 위한 기본 역량을 갖추었다.</dd>
           </dl>
           <a class="evidence-link" href="#evidence">근거 — 아래에서 확인할 수 있습니다 →</a>
         </details>
@@ -527,32 +526,31 @@
     </div>
   </section>
 
-  <!-- ============ 근거 : 최소 1개는 위 강점 항목과 연결되어야 함 ============ -->
+  <!-- 근거 자료 -->
   <section id="evidence" aria-labelledby="evidence-h">
     <div class="wrap">
       <p class="eyebrow">EVIDENCE</p>
       <h2 id="evidence-h">근거 자료</h2>
-      <p class="section-note">개인정보를 제거한 산출물, 캡처, 또는 결과를 확인할 수 있는 링크를 하나 이상 연결하세요.</p>
+      <p class="section-note">개인정보를 제거한 산출물, 캡처, 또는 결과를 확인할 수 있는 이미지입니다.</p>
       <div class="evidence-frame">
-        [<img src="12.png"]
+        <img src="12.png" alt="근거 자료 이미지" class="evidence-img">
       </div>
     </div>
   </section>
 
 </main>
 
-<!-- ============ 마무리 ============ -->
+<!-- 마무리 -->
 <footer class="closing void-zone">
   <div class="wrap">
     <p class="eyebrow">STATUS</p>
     <h2>이성환<br>노력형</h2>
-    <!-- ✏️ 여기 수정: 마무리 한 줄 + 짧은 확인 방법 요약 -->
     <div class="box">
-      
+      지속적인 학습과실습을 통해 문제 해결 능력을 키우고 있습니다.
     </div>
   </div>
   <div class="marquee" aria-hidden="true">
-    <span class="marquee-track">DESIGNED&nbsp;BY&nbsp;OOO&nbsp;&nbsp;&nbsp;&nbsp;DESIGNED&nbsp;BY&nbsp;OOO&nbsp;&nbsp;&nbsp;&nbsp;DESIGNED&nbsp;BY&nbsp;OOO&nbsp;&nbsp;&nbsp;&nbsp;DESIGNED&nbsp;BY&nbsp;OOO&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span class="marquee-track">DESIGNED BY LEE SEONG HWAN&nbsp;&nbsp;&nbsp;&nbsp;DESIGNED BY LEE SEONG HWAN&nbsp;&nbsp;&nbsp;&nbsp;DESIGNED BY LEE SEONG HWAN&nbsp;&nbsp;&nbsp;&nbsp;</span>
   </div>
   <p class="sr-only">제작: 이성환</p>
 </footer>
